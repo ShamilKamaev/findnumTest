@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Find Num</title>
+</head>
+
+<body>
+
+
+  <script>
+    function findNum() {
+      var xNum = parseInt(prompt("Пожалуйста введите число от 0 до 1024. Мы попробуем его угадать"));
+      var fromNum = 0;
+      var toNum = 1024;
+      var midNum = Math.floor((fromNum + toNum) / 2);
+
+      var correctCheck = function () {
+        if (parseInt(xNum) < 0 || parseInt(xNum) > 1024 || isNaN(xNum)) {
+          xNum = parseInt(prompt("Пожалуйста введите корректное число (от 0 до 1024)"));
+          correctCheck();
+        } else {
+          return;
+        }
+      };
+
+      correctCheck();
+      
+      while (fromNum <= toNum) {
+        if (midNum <= xNum) {
+          fromNum = midNum;
+          midNum = Math.round((fromNum + toNum) / 2);
+        } else {
+          toNum = midNum;
+          midNum = Math.round((fromNum + toNum) / 2);
+        }
+        console.log(fromNum, midNum, toNum);
+        
+        if (xNum == midNum) {
+          window.alert('Ваше число ' + midNum);
+          break;
+        } else if (toNum == 1) {
+          window.alert('Ваше число ' + fromNum);
+          break;
+        }
+      }
+    }
+
+    findNum()
+  </script>
+</body>
+
+</html>
